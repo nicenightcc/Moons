@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Base", "Microservices.Base\Microservices.Base.csproj", "{9413E821-B00B-4B8D-B183-6A2DD1BF15FA}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microservices.Adapters", "Microservices.Adapters\Microservices.Adapters.shproj", "{94106303-27CC-48D5-864D-984C374EEA24}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microservices.Base.Core", "Microservices.Base.Core\Microservices.Base.Core.shproj", "{C6BF22FD-F601-4202-B435-303315F62C99}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microservices.Builder", "Microservices.Builder\Microservices.Builder.shproj", "{06F2AC77-EDB9-45AE-B9DC-9CF2EF101431}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microservices.Common", "Microservices.Common\Microservices.Common.shproj", "{95DB52C2-CCF5-4D84-AAC0-D1743F95CF0B}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microservices.IoC", "Microservices.IoC\Microservices.IoC.shproj", "{C5F96DE3-E286-4D17-94EE-FC77025A0E25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{0C95DCD1-9253-4DD9-BECF-2526E8D8BB5D}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Microservices.Builder\Microservices.Builder.projitems*{06f2ac77-edb9-45ae-b9dc-9cf2ef101431}*SharedItemsImports = 13
+		Microservices.Adapters\Microservices.Adapters.projitems*{94106303-27cc-48d5-864d-984c374eea24}*SharedItemsImports = 13
+		Microservices.Common\Microservices.Common.projitems*{95db52c2-ccf5-4d84-aac0-d1743f95cf0b}*SharedItemsImports = 13
+		Microservices.IoC\Microservices.IoC.projitems*{c5f96de3-e286-4d17-94ee-fc77025a0e25}*SharedItemsImports = 13
+		Microservices.Base.Core\Microservices.Base.Core.projitems*{c6bf22fd-f601-4202-b435-303315f62c99}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9413E821-B00B-4B8D-B183-6A2DD1BF15FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9413E821-B00B-4B8D-B183-6A2DD1BF15FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9413E821-B00B-4B8D-B183-6A2DD1BF15FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9413E821-B00B-4B8D-B183-6A2DD1BF15FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C95DCD1-9253-4DD9-BECF-2526E8D8BB5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C95DCD1-9253-4DD9-BECF-2526E8D8BB5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C95DCD1-9253-4DD9-BECF-2526E8D8BB5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C95DCD1-9253-4DD9-BECF-2526E8D8BB5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F05FC310-1AD7-4759-BF97-ECF2C15C5C58}
+	EndGlobalSection
+EndGlobal

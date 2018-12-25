@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.18.1218</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microservices.Adapters.IWebApi" Version="0.18.1212" />
+  </ItemGroup>
+
+</Project>
