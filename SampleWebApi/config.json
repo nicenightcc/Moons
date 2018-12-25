@@ -1,0 +1,5 @@
+{
+  "WebApi": {
+    "TestService": "http://localhost:5000"
+  }
+}

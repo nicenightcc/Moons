@@ -16,8 +16,11 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
-    <PackageReference Include="Microservices.Adapters.IWebApi" Version="0.18.1218" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Microservices.Adapters\Microservices.Adapters.IWebApi\Microservices.Adapters.IWebApi.csproj" />
   </ItemGroup>
 
 </Project>

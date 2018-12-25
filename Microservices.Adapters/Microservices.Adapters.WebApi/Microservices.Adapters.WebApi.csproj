@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microservices.Adapters.IWebApi" Version="0.18.1212" />
+    <ProjectReference Include="..\Microservices.Adapters.IWebApi\Microservices.Adapters.IWebApi.csproj" />
   </ItemGroup>
 
 </Project>

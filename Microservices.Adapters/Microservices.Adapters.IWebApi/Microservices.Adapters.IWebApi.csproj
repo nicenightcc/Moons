@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microservices.Base" Version="0.18.1218" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Microservices.Base\Microservices.Base\Microservices.Base.csproj" />
   </ItemGroup>
 
 </Project>
