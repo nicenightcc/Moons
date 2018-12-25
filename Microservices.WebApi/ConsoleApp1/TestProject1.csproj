@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microservices.Adapters.WebApi" Version="0.18.1218" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Microservices.WebApi\Microservices.WebApi.csproj" />
     <ProjectReference Include="..\TestService\TestService.csproj" />
   </ItemGroup>

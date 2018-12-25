@@ -1,6 +1,6 @@
 using ClassLibrary1;
-using Microservices.Adapters.IDatabase;
 using Microservices.Adapters.EF.SQLite;
+using Microservices.Adapters.IDatabase;
 using Microservices.Common;
 using Microservices.IoC;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,7 +16,7 @@ namespace UnitTestProject1
         {
             Config.Root.Load(Path.Combine(Environment.CurrentDirectory, "config.json"));
             IoCFac.Instance.Load(Path.Combine(Environment.CurrentDirectory, "lib"));
-            var t = IoCFac.Instance.GetByBase<IEntity>();
+            var t = IoCFac.Instance.GetClassList<IEntity>();
         }
         [TestMethod]
         public void TestMethod1()
