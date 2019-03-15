@@ -1,9 +1,9 @@
-﻿using Microservices.Builder;
-using Microservices.Common;
+﻿using Microservices.Common;
+using Microservices.WebApi;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Microservices.WebApi
+namespace Microservices.Builder
 {
     public static class WebApi
     {

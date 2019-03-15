@@ -7,8 +7,11 @@
 
   <ItemGroup>
     <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.646" />
-    <PackageReference Include="Microservices.Adapters.IDatabase" Version="0.18.1218" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microservices.Adapters.IDatabase\Microservices.Adapters.IDatabase.csproj" />
   </ItemGroup>
 
 </Project>

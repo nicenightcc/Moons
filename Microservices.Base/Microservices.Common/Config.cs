@@ -44,4 +44,3 @@ namespace Microservices.Common
         public static implicit operator string(Config config) { return config.ToString(); }
     }
 }
-

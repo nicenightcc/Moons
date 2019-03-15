@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 
 namespace Microservices.Adapters.IDatabase
 {
-    public interface IDoctAdapter : IAdapter
+    public interface IJsonAdapter : IAdapter
     {
-        void Add<T>(T entity) where T : class, ICache, new();
+        void Add<T>(T cache) where T : class, ICache, new();
 
-        void AddRange<T>(IEnumerable<T> entities) where T : class, ICache, new();
+        void AddRange<T>(IEnumerable<T> caches) where T : class, ICache, new();
 
         int Count<T>(Expression<Func<T, bool>> func) where T : class, ICache, new();
 

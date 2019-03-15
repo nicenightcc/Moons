@@ -14,19 +14,46 @@ namespace Microservices.IoC
         protected List<Type> types = new List<Type>();
         protected IoCFac() { }
 
-        //path is file or directory or namespace
-        [Obsolete("使用ServerBuilder.Load")]
-        public IoCFac Load(string path)
+        [Obsolete("使用ServerBuilder.LoadFile")]
+        public IoCFac LoadFile(string file)
         {
-            if (File.Exists(path))
+            if (File.Exists(file))
             {
-                LoadFile(path);
+                Log.Logger.Info("Loading Assembly from: " + file);
+                try
+                {
+                    Assembly assembly = Assembly.LoadFrom(file);
+                    if (assembly != null)
+                        Load(assembly);
+                }
+                catch (Exception e)
+                {
+                    Log.Logger.Error($"Load Assembly Error: [{Path.GetFileName(file)}]", e);
+                }
             }
-            else if (File.Exists(Path.Combine(Environment.CurrentDirectory, path)))
+            return this;
+        }
+
+        [Obsolete("使用ServerBuilder.LoadAssembly")]
+        public IoCFac LoadAssembly(string assembly)
+        {
+            try
             {
-                LoadFile(Path.Combine(Environment.CurrentDirectory, path));
+                Assembly ass = Assembly.Load(new AssemblyName(assembly));
+                if (ass != null)
+                    Load(ass);
             }
-            else if (Directory.Exists(path))
+            catch (Exception e)
+            {
+                Log.Logger.Error($"Load Assembly Error: [{assembly}]", e);
+            }
+            return this;
+        }
+
+        [Obsolete("使用ServerBuilder.LoadDir")]
+        public IoCFac LoadDir(string path)
+        {
+            if (Directory.Exists(path))
             {
                 var files = Directory.GetFiles(path).Where(en => en.EndsWith(".dll"));
                 if (files.Count() == 0)
@@ -35,23 +62,10 @@ namespace Microservices.IoC
                 foreach (var file in files)
                     LoadFile(file);
             }
-            else
-            {
-                try
-                {
-                    Assembly assembly = Assembly.Load(new AssemblyName(path));
-                    if (assembly != null)
-                        Load(assembly);
-                }
-                catch (Exception e)
-                {
-                    Log.Logger.Error($"Load Assembly Error: [{path}]", e);
-                }
-            }
             return this;
         }
 
-        public void Load(Assembly assembly)
+        private void Load(Assembly assembly)
         {
             try
             {
@@ -65,21 +79,6 @@ namespace Microservices.IoC
             catch (Exception e)
             {
                 Log.Logger.Error($"Load Assembly Error: [{assembly.FullName}]", e);
-            }
-        }
-
-        protected void LoadFile(string file)
-        {
-            Log.Logger.Info("Loading Assembly from: " + file);
-            try
-            {
-                Assembly assembly = Assembly.LoadFrom(file);
-                if (assembly != null)
-                    Load(assembly);
-            }
-            catch (Exception e)
-            {
-                Log.Logger.Error($"Load Assembly Error: [{Path.GetFileName(file)}]", e);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microservices.Base;
+using Newtonsoft.Json;
 
 namespace Microservices.Adapters.IDatabase
 {

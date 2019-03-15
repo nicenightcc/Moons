@@ -1,0 +1,10 @@
+{
+  "WebApi": {
+    "TestService": "https://localhost:5000",
+    "UserCenter.WebApi": "https://localhost:5000"
+  },
+  "SQLite": "Data Source=test.db",
+  "Redis": "gd.nicenight.cc:63791,password=974476272",
+  "MySql": "server=gd.nicenight.cc;port=33061;database=event;uid=root;password=974476272;character Set=utf8;sslMode=None;Pooling=true",
+  "Mongo": "mongodb://root:974476272@gd.nicenight.cc:27117/nicenight"
+}

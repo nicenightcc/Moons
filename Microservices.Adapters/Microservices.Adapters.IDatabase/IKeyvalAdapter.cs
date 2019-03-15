@@ -1,31 +1,34 @@
-﻿using Microservices.Adapters.IDatabase;
-using Microservices.Base;
+﻿using Microservices.Base;
 using System;
 
-namespace Microservices.Adapters.Redis
+namespace Microservices.Adapters.IDatabase
 {
     public interface IKeyvalAdapter : IAdapter
     {
         string StringGet(string key);
 
-        void StringSet(string key, string val);
+        void StringSet(string key, string val, TimeSpan? expiry = null);
 
-        void StringSet(string key, string val, TimeSpan expiry);
+        void KeyExpire(string key, TimeSpan expiry);
 
-        string HashGet(string field, string key);
+        void KeyExpire(string key, DateTime expiry);
 
-        void HashSet(string field, string key, string val);
+        void KeyExpire(string key);
 
-        T HashGet<T>(string field, string key) where T : class, ICache, new();
+        bool KeyExists(string key);
 
-        void HashSet<T>(string field, string key, T val) where T : class, ICache, new();
+        bool KeyDelete(string key);
 
-        bool HashExists(string field, string key);
+        string HashGet(string key, string field);
 
-        void Expire(string key, TimeSpan expiry);
+        void HashSet(string key, string field, string val);
 
-        void Expire(string key, DateTime expiry);
+        T HashGet<T>(string key, string field) where T : class, ICache, new();
 
-        bool Exists(string key);
+        void HashSet<T>(string key, string field, T val) where T : class, ICache, new();
+
+        void HashDelete(string key, string field);
+
+        bool HashExists(string key, string field);
     }
 }

@@ -1,0 +1,7 @@
+{
+  "WebApi": {
+    "urls": "http://localhost:5000",
+    "TestService": "http://localhost:5000/"
+  },
+  "MySql": "server=gd.nicenight.cc;port=33061;database=eventreport;uid=root;password=974476272;character Set=utf8;sslMode=None"
+}

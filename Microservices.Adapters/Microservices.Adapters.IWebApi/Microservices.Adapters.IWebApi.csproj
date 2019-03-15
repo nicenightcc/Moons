@@ -2,15 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.18.1225</Version>
+    <Version>0.18.1230</Version>
+    <AssemblyVersion>0.18.12292.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microservices.Base" Version="0.18.1229" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Microservices.Base\Microservices.Base\Microservices.Base.csproj" />
   </ItemGroup>
 
 </Project>

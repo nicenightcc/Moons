@@ -1,7 +1,5 @@
-﻿using Microservices.Adapters;
-using Microservices.Adapters.WebApi;
+﻿using Microservices.Builder;
 using Microservices.Common;
-using Microservices.WebApi;
 
 namespace ConsoleApp1
 {
@@ -10,7 +8,11 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Config.Root.Load("config.json");
-            new Microservices.Builder.ServiceBuilder().Load("TestService").UseWebApi().UseAdapter<WebApiAdpater>().Run();
+            new Microservices.Builder.ServiceBuilder()
+            .LoadAssembly("TestService")
+            .UseAdapter<Microservices.Adapters.WebApi.WebApiAdapter>()
+            .UseWebApi()
+            .Run();
         }
     }
 }

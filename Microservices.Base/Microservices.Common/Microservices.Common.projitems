@@ -9,12 +9,21 @@
     <Import_RootNamespace>Microservices.Common</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Enum\DataStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\CommandException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\AdapterException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)EnumExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Exceptions\HandlerException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\IDefinitionExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Log.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TypeExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)log4net.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Exceptions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Microservices.Adapters.IWebApi
 {
-    public abstract class ApiHandler<TRequest, TResponse> : IApiHandler where TRequest : IApiRequest<TResponse> where TResponse : IApiResponse
+    public abstract class ApiHandler<TRequest, TResponse> : IApiHandler where TRequest : IApiRequest<TResponse> where TResponse : IApiResponse, new()
     {
         public HttpContext HttpContext { get; set; }
 

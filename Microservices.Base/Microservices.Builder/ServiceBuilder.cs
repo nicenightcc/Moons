@@ -1,5 +1,4 @@
 ﻿using Microservices.Common;
-using Microservices.IoC;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,12 +16,6 @@ namespace Microservices.Builder
         public ServiceBuilder ConfigureServices(Action<ServiceBuilder> configureServices)
         {
             configure.Add(configureServices);
-            return this;
-        }
-
-        public ServiceBuilder Load(string path)
-        {
-            IoCFac.Instance.Load(path);
             return this;
         }
 

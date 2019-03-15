@@ -1,4 +1,5 @@
 ﻿using Microservices.Adapters.IDatabase;
+using Microservices.Base;
 using Microservices.Common;
 using Microservices.IoC;
 using System;
@@ -37,7 +38,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -50,7 +51,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -62,7 +63,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -74,7 +75,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -88,7 +89,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -102,7 +103,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -114,7 +115,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -126,7 +127,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -138,7 +139,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -150,7 +151,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -162,7 +163,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -178,7 +179,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -197,7 +198,7 @@ namespace Microservices.Adapters.EF.Oracle
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 

@@ -10,8 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)IAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ICache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ICommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDefinition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IResponse.cs" />

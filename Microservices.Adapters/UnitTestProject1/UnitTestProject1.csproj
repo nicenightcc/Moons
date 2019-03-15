@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -14,8 +14,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Microservices.Adapters.EF.MySql\Microservices.Adapters.EF.MySql.csproj" />
-    <ProjectReference Include="..\Microservices.Adapters.EF.SQLite\Microservices.Adapters.EF.SQLite.csproj" />
-    <ProjectReference Include="..\Microservices.Adapters.IDatabase\Microservices.Adapters.IDatabase.csproj" />
+    <ProjectReference Include="..\Microservices.Adapters.WebApi\Microservices.Adapters.WebApi.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

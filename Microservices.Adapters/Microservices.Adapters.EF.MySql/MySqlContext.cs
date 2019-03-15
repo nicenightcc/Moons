@@ -1,5 +1,5 @@
-﻿using Microservices.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace Microservices.Adapters.EF.MySql
@@ -17,18 +17,23 @@ namespace Microservices.Adapters.EF.MySql
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL(connectionString);
+
+            //Debug模式显示执行的sql语句
+#if DEBUG
+            var loggerFactory = new LoggerFactory();
+            loggerFactory.AddProvider(new EFLoggerProvider());
+            optionsBuilder.UseLoggerFactory(loggerFactory);
+#endif
+
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var table in this.tables)
-            {
                 if (modelBuilder.Model.FindEntityType(table) == null)
                     modelBuilder.Model.AddEntityType(table);
-                else
-                    Log.Logger.Warn($"Table [{table.Name}] is exist!");
-            }
+
             base.OnModelCreating(modelBuilder);
         }
     }

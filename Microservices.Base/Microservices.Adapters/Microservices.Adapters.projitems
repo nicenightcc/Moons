@@ -10,6 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AdapterFac.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Adapters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Adapter.cs" />
   </ItemGroup>
 </Project>

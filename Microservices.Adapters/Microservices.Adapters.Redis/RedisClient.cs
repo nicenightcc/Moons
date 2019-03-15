@@ -1,4 +1,5 @@
-﻿using StackExchange.Redis;
+﻿using Microservices.Common;
+using StackExchange.Redis;
 using System;
 
 namespace Microservices.Adapters.Redis
@@ -6,13 +7,10 @@ namespace Microservices.Adapters.Redis
     public class RedisClient : IDisposable
     {
         private string connectionString;
-        private int database = 0;
         private ConnectionMultiplexer connection;
 
-        public RedisClient(string connectionString, string database)
+        public RedisClient(string connectionString)
         {
-            if (!int.TryParse(database, out this.database))
-                this.database = 0;
             this.connectionString = connectionString;
             this.connection = ConnectionMultiplexer.Connect(this.connectionString);
         }
@@ -25,7 +23,7 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 

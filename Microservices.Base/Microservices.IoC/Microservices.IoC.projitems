@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DIParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoCAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoCFac.cs" />
   </ItemGroup>

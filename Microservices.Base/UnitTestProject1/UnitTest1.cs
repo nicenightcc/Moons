@@ -2,6 +2,7 @@ using Microservices.Adapters;
 using Microservices.Common;
 using Microservices.IoC;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 using TestService;
 
 namespace UnitTest
@@ -24,7 +25,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethod3()
         {
-            IoCFac.Instance.Load("UnitTestProject1");
+            IoCFac.Instance.LoadAssembly("UnitTestProject1");
             var types = IoCFac.Instance.GetAll();
             var adapter = IoCFac.Instance.GetClass<ITestAdapter>();
         }
@@ -35,6 +36,12 @@ namespace UnitTest
             var adapters = AdapterFac.Instance.GetAll();
             var testAdapter = AdapterFac.Instance.GetAdapter<ITestAdapter>();
             var result = testAdapter.Test();
+        }
+        [TestMethod]
+        public void TestMethod5()
+        {
+            var a = Directory.Exists("logs");
+            var b = File.Exists("log4net.config");
         }
     }
 }

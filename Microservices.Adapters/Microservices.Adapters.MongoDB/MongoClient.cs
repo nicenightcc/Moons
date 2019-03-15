@@ -1,4 +1,5 @@
 ﻿using global::MongoDB.Driver;
+using Microservices.Common;
 using System;
 
 namespace Microservices.Adapters.MongoDB
@@ -40,7 +41,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+               throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using global::MongoDB.Driver;
 using global::MongoDB.Driver.Linq;
 using Microservices.Adapters.IDatabase;
+using Microservices.Base;
 using Microservices.Common;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,13 @@ using System.Linq.Expressions;
 
 namespace Microservices.Adapters.MongoDB
 {
-    public class MongoAdapter : IDoctAdapter
+    public class MongoAdapter : IJsonAdapter
     {
         private MongoClient client;
         private IMongoDatabase database;
 
         public string Name { get => "MongoAdapter"; }
-        public Type TargetType { get => typeof(IDoctAdapter); }
+        public Type TargetType { get => typeof(IJsonAdapter); }
 
         public MongoAdapter()
         {
@@ -34,7 +35,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -46,7 +47,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -58,7 +59,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -70,7 +71,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -82,7 +83,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -94,7 +95,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -106,7 +107,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -118,7 +119,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -130,7 +131,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -142,7 +143,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -154,7 +155,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -162,13 +163,13 @@ namespace Microservices.Adapters.MongoDB
         {
             try
             {
-                var entity = ((IDoctAdapter)this).Find<T>(func);
+                var entity = this.Find<T>(func);
                 action?.Invoke(entity);
                 return (int)database.GetCollection<T>(typeof(T).Name).ReplaceOne(func, entity).ModifiedCount;
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -176,7 +177,7 @@ namespace Microservices.Adapters.MongoDB
         {
             try
             {
-                var entities = ((IDoctAdapter)this).Query<T>(func);
+                var entities = this.Query<T>(func);
                 int count = 0;
                 foreach (T en in entities)
                 {
@@ -187,7 +188,7 @@ namespace Microservices.Adapters.MongoDB
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 

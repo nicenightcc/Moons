@@ -1,4 +1,5 @@
 ﻿using Microservices.Adapters.IDatabase;
+using Microservices.Base;
 using Microservices.Common;
 using Newtonsoft.Json;
 using System;
@@ -17,8 +18,10 @@ namespace Microservices.Adapters.Redis
             string connstr = Config.Root["Redis"];
             if (string.IsNullOrEmpty(connstr))
                 throw new Exception("Config Not Found: [Redis]");
-            this.client = new RedisClient(connstr, Config.Root["RedisDatabase"]);
-            this.database = this.client.GetDatabase();
+            string redisdb = Config.Root["RedisDB"];
+            var db = redisdb == null ? 0 : int.Parse(redisdb);
+            this.client = new RedisClient(connstr);
+            this.database = this.client.GetDatabase(db);
         }
 
         public string StringGet(string key)
@@ -29,7 +32,7 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
@@ -41,11 +44,11 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public void StringSet(string key, string val, TimeSpan expiry)
+        public void StringSet(string key, string val, TimeSpan? expiry = null)
         {
             try
             {
@@ -53,11 +56,11 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public T HashGet<T>(string field, string key) where T : class, ICache, new()
+        public T HashGet<T>(string key, string field) where T : class, ICache, new()
         {
             try
             {
@@ -69,11 +72,11 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public void HashSet<T>(string field, string key, T val) where T : class, ICache, new()
+        public void HashSet<T>(string key, string field, T val) where T : class, ICache, new()
         {
             try
             {
@@ -81,11 +84,11 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public string HashGet(string field, string key)
+        public string HashGet(string key, string field)
         {
             try
             {
@@ -93,11 +96,11 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public void HashSet(string field, string key, string val)
+        public void HashSet(string key, string field, string val)
         {
             try
             {
@@ -105,11 +108,11 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public bool HashExists(string field, string key)
+        public bool HashExists(string key, string field)
         {
             try
             {
@@ -117,11 +120,23 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public void Expire(string key, TimeSpan expiry)
+        public void HashDelete(string key, string field)
+        {
+            try
+            {
+                database.HashDelete(key, field);
+            }
+            catch (Exception e)
+            {
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
+            }
+        }
+
+        public void KeyExpire(string key, TimeSpan expiry)
         {
             try
             {
@@ -129,11 +144,11 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public void Expire(string key, DateTime expiry)
+        public void KeyExpire(string key, DateTime expiry)
         {
             try
             {
@@ -141,11 +156,23 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
 
-        public bool Exists(string key)
+        public void KeyExpire(string key)
+        {
+            try
+            {
+                database.KeyExpire(key, TimeSpan.Zero);
+            }
+            catch (Exception e)
+            {
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
+            }
+        }
+
+        public bool KeyExists(string key)
         {
             try
             {
@@ -153,7 +180,19 @@ namespace Microservices.Adapters.Redis
             }
             catch (Exception e)
             {
-                throw e;
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
+            }
+        }
+
+        public bool KeyDelete(string key)
+        {
+            try
+            {
+                return database.KeyDelete(key);
+            }
+            catch (Exception e)
+            {
+                throw new AdapterException(e.InnerException?.Message ?? e.Message);
             }
         }
     }

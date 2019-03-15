@@ -6,6 +6,11 @@ namespace TestService
     public class TestRequest : IApiRequest<TestResponse>
     {
     }
+    public class TestResponse : IApiResponse
+    {
+        public ProcessCode Code { get; set; }
+        public string Message { get; set; }
+    }
     public class TestHandler : ApiHandler<TestRequest, TestResponse>
     {
         private IApiAdapter webApiAdapter;
@@ -15,17 +20,12 @@ namespace TestService
         }
         public override TestResponse Execute(TestRequest request)
         {
-            var a = webApiAdapter.Call(new Test2Request { Message = "Hello World!" });
+            var a = webApiAdapter.Call(new Test2Request { });
             return new TestResponse
             {
                 Code = ProcessCode.OK,
                 Message = a.Message
             };
         }
-    }
-    public class TestResponse : IApiResponse
-    {
-        public ProcessCode Code { get; set; }
-        public string Message { get; set; }
     }
 }

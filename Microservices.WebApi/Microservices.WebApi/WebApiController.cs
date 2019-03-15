@@ -1,6 +1,7 @@
 ﻿using Microservices.Adapters.IWebApi;
 using Microservices.Base;
 using Microservices.Common;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -10,17 +11,14 @@ namespace Microservices.WebApi
 {
     public class WebApiController : Controller
     {
-        IHandlerAdapter adapter = null;
-        ApiCache cache = null;
 
-        public WebApiController(IHandlerAdapter adapter, ApiCache cache)
+        public WebApiController()
         {
             Log.SetName("controller");
-            this.adapter = adapter;
-            this.cache = cache;
         }
 
-        //[Route("/{path}/{api}/{ver?}")]
+        [HttpPost]
+        [EnableCors("AllowAll")]
         public ActionResult Index(string path, string api, string ver = null)
         {
             #region 检查接口
@@ -34,14 +32,13 @@ namespace Microservices.WebApi
                 if (name.EndsWith("request") || name.EndsWith("handler"))
                     name = name.Substring(0, name.Length - 7);
 
-                if (cache.ContainsKey(name))
-                    handlerType = cache[name];
-                //if (handlerType == null || !typeof(IApiHandler).IsAssignableFrom(handlerType))
+                if (ApiCache.Instance.ContainsKey(name))
+                    handlerType = ApiCache.Instance[name];
                 else throw new Exception("接口不存在");
 
                 var typeArgs = handlerType.BaseType.GenericTypeArguments;
-                requestType = typeArgs.FirstOrDefault(en => typeof(IRequest).IsAssignableFrom(en));
-                responseType = typeArgs.FirstOrDefault(en => typeof(IResponse).IsAssignableFrom(en));
+                requestType = typeArgs.First(en => typeof(IRequest).IsAssignableFrom(en));
+                responseType = typeArgs.First(en => typeof(IResponse).IsAssignableFrom(en));
             }
             catch (Exception e)
             {
@@ -66,8 +63,6 @@ namespace Microservices.WebApi
             //        return result;
             //    }
             //}
-
-
             #endregion
 
             #region 生成Request
@@ -77,15 +72,12 @@ namespace Microservices.WebApi
             {
                 using (var reader = new StreamReader(HttpContext.Request.Body))
                     body = reader.ReadToEnd();
-#if DEBUG
-                if (string.IsNullOrWhiteSpace(body))
-                    body = "{}";
-#endif
+
                 if (string.IsNullOrWhiteSpace(body)) throw new Exception("requset错误");
 
                 try
                 {
-                    request = Newtonsoft.Json.JsonConvert.DeserializeObject(body ?? "", requestType) as IRequest;
+                    request = Newtonsoft.Json.JsonConvert.DeserializeObject(body, requestType) as IRequest;
                 }
                 catch (Exception e)
                 {
@@ -111,16 +103,35 @@ namespace Microservices.WebApi
             //    path, api, ver ?? "<default>");
             try
             {
-                var response = adapter.Execute(handlerType, request, HttpContext);
+                var response = WebApiAdapter.Instance.Execute(request, HttpContext);
 
                 ResponseModel result = new ResponseModel(request, response as IApiResponse);
-                //Log.Logger.Info(result);
                 return result;
             }
+            catch (ResolveException e)
+            {
+                var result = new ResponseModel(ProcessCode.InternalServerError, "Handler 实例化出错: " + e.Message);
+                Log.Logger.Error(result);
+                return result;
+            }
+            //catch (AdapterException e)
+            //{
+            //    var result = new ResponseModel(ProcessCode.InternalServerError, e.Message);
+            //    return result;
+            //}
+            //catch (CommandException e)
+            //{
+            //    var result = new ResponseModel(ProcessCode.InternalServerError, e.Message);
+            //    return result;
+            //}
+            //catch (HandlerException e)
+            //{
+            //    var result = new ResponseModel(ProcessCode.InternalServerError, e.Message);
+            //    return result;
+            //}
             catch (Exception e)
             {
                 var result = new ResponseModel(ProcessCode.InternalServerError, e.InnerException?.Message ?? e.Message);
-                Log.Logger.Error(result);
                 return result;
             }
             #endregion
